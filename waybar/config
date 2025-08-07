@@ -8,7 +8,7 @@
   "modules-right": ["network", "pulseaudio", "battery", "tray"],
 
   "hyprland/workspaces": {
-    "disable-scroll": true,
+    "disable-scroll": false,
     "all-outputs": true
   },
 
