@@ -1,43 +1,64 @@
-$bg: #1d2021;
-$bg-alt: #282828;
-$fg: #ebdbb2;
-$accent: #d79921;
-$accent2: #83a598;
-$red: #cc241d;
-$green: #98971a;
+/* ===============================
+   EWW CSS — Gruvbox (Dark)
+   =============================== */
+@define-color bg0   #282828;
+@define-color bg1   #3c3836;
+@define-color bg2   #504945;
+@define-color fg0   #fbf1c7;
+@define-color fg1   #ebdbb2;
+@define-color aqua  #8ec07c;
+@define-color yellow #fabd2f;
+@define-color red   #fb4934;
 
-* { all: unset; font-family: "CaskaydiaCove Nerd Font", "Cascadia Code", monospace; }
-
-.bar {
-  background: $bg;
-  color: $fg;
-  padding: 4px 10px;
+* {
+  font-family: "FiraCode Nerd Font", "JetBrainsMono Nerd Font", monospace;
+  font-size: 14px;
+  color: @fg0;
 }
 
-.title { color: $accent; font-weight: 600; }
-
-.pill {
-  background: $bg-alt;
-  border-radius: 999px;
-  padding: 4px 10px;
+.vol-box {
+  background: @bg0;
+  border-radius: 12px;
+  padding: 12px;
+  border: 1px solid @bg2;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.35);
 }
 
-.cpu { color: $accent; }
-.mem { color: $accent2; }
+.vol-header {
+  background: @bg1;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
 
-.ws {
-  .ws-btn {
-    background: $bg-alt;
-    color: $fg;
-    padding: 2px 8px;
-    border-radius: 6px;
-    transition: 120ms ease;
-    &:hover { background: lighten($bg-alt, 3%); }
-    &.active {
-      background: $accent2;
-      color: $bg;
-      font-weight: 700;
-    }
-  }
+.vol-title {
+  color: @aqua;
+  font-weight: 700;
+}
+
+.vol-value {
+  margin-left: auto;
+  color: @fg1;
+}
+
+.vol-controls {
+  background: @bg1;
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+
+.btn {
+  background: @bg2;
+  border-radius: 8px;
+  padding: 6px 10px;
+}
+
+.btn:hover { filter: brightness(1.1); }
+.btn:active { filter: brightness(0.95); }
+
+.mute.on { background: @red; color: #1d2021; }
+
+.slider {
+  min-width: 220px;
+  margin-left: 8px;
 }
 
