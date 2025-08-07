@@ -1,0 +1,48 @@
+# ----- Posición y forma -----
+anchor=top-right
+margin=12,12,12,12
+padding=10
+width=360
+height=180
+max-visible=5
+border-size=2
+border-radius=8
+
+# ----- Fuente -----
+font=JetBrains Mono 10
+
+# ----- Estilo general Gruvbox -----
+background-color=#282828EE
+text-color=#ebdbb2
+border-color=#458588
+icons=1
+markup=1
+format=<b>%s</b>\n%b
+
+# ----- Tiempo -----
+default-timeout=6000
+ignore-timeout=0
+
+# ----- Urgencia: low -----
+[urgency=low]
+background-color=#3c3836DD
+border-color=#689d6a
+default-timeout=4000
+
+# ----- Urgencia: normal -----
+[urgency=normal]
+background-color=#282828EE
+border-color=#458588
+default-timeout=6000
+
+# ----- Urgencia: high -----
+[urgency=high]
+background-color=#3c3836F0
+border-color=#cc241d
+text-color=#ebdbb2
+default-timeout=10000
+
+# ----- Modo No Molestar -----
+[mode=do-not-disturb]
+invisible=1
+

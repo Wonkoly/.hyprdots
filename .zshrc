@@ -4,8 +4,12 @@ export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-
-ZSH_THEME="robbyrussell"
+# Detectar si es root y cambiar tema de Oh My Zsh
+if [[ $EUID -eq 0 ]]; then
+    ZSH_THEME="fino-time"   # Tema para root
+else
+    ZSH_THEME="robbyrussell"  # Tema normal para usuario común
+fi
 
 # Instalacion de Plugins
 plugins=(
