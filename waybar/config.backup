@@ -1,0 +1,102 @@
+{
+  // Capa/posición de la barra
+  "layer": "top",
+  "position": "top",
+  // Altura y margen opcional
+  "height": 30,
+  "margin-top": 0,
+  "margin-left": 8,
+  "margin-right": 8,
+
+  // Módulos en cada lado de la barra
+  "modules-left": [
+    "hyprland/workspaces",
+    "hyprland/window"
+  ],
+  "modules-center": [
+    "clock"
+  ],
+  "modules-right": [
+    "network",
+    "pulseaudio",
+    "battery",
+    "tray"
+  ],
+
+  // ----- MÓDULOS INTEGRADOS -----
+
+  // Workspaces de Hyprland
+  "hyprland/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": true,
+    "format": "{icon}",
+    // Opcional: mostrar numeración simple si no quieres iconos
+    // "format": "{name}"
+    "on-click": "activate"
+  },
+
+  // Ventana activa (título)
+  "hyprland/window": {
+    "format": "{}",
+    "max-length": 80,
+    "separate-outputs": false
+  },
+
+  // Reloj (usa strftime)
+  "clock": {
+    "format": "{:%a %d %b  %H:%M}",
+    "tooltip-format": "{:%A, %d de %B de %Y}\nSemana %V",
+    "interval": 1
+  },
+
+  // Red (Wi-Fi/Ethernet) —— requiere NetworkManager
+  "network": {
+    "format-wifi": "  {essid} {signalStrength}%",
+    "format-ethernet": " {ifname}",
+    "format-disconnected": " Sin red",
+    "tooltip-format": "{ifname} — {ipaddr}/{cidr}\nSubida: {bandwidthUpBits}\nBajada: {bandwidthDownBits}",
+    "max-length": 40,
+    "on-click": "nm-connection-editor" // o tu gestor preferido
+  },
+
+  // Volumen (PipeWire a través de compatibilidad PulseAudio)
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "",
+    "tooltip": true,
+    "scroll-step": 5,
+    "format-icons": {
+      "headphones": "",
+      "default": ["", "", ""]
+    },
+    "on-click": "pavucontrol" // Abre control de audio
+  },
+
+  // Batería (se oculta sola si no hay batería)
+  "battery": {
+    "states": {
+      "warning": 20,
+      "critical": 10
+    },
+    "format": "{icon} {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-full": "  {capacity}%",
+    "format-alt": "{time}",
+    "format-icons": ["", "", "", "", ""]
+  },
+
+  // Bandeja del sistema (iconos de apps)
+  "tray": {
+    "icon-size": 16,
+    "spacing": 8
+  }
+
+  // ----- EJEMPLO DE CUSTOM SCRIPT (opcional) -----
+  // "custom/weather": {
+  //   "exec": "~/.config/waybar/scripts/weather.sh",
+  //   "interval": 600,
+  //   "return-type": "json",
+  //   "tooltip": true
+  // }
+}
+

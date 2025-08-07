@@ -1,11 +1,4 @@
-/* ===============================
-   Waybar Style — Gruvbox (Dark)
-   Notas:
-   - GTK3 NO soporta :root ni var().
-   - Define colores con @define-color y úsalos como @nombre.
-   =============================== */
-
-/* Paleta Gruvbox */
+/* Waybar Style — Gruvbox (Dark) — 30px exacto */
 @define-color bg0        #282828;
 @define-color bg1        #3c3836;
 @define-color bg2        #504945;
@@ -22,30 +15,27 @@
 @define-color aqua       #8ec07c;
 @define-color orange     #fe8019;
 
-/* Contenedor principal */
 window#waybar {
   background: transparent;
   color: @fg0;
   font-family: "FiraCode Nerd Font", "JetBrainsMono Nerd Font", monospace;
-  font-size: 14px;
+  font-size: 12px; /* baja 1px para cerrar altura */
 }
 
-/* “Cápsula” de la barra */
 window#waybar > box {
   background: @bg0;
-  border-radius: 12px;
-  padding: 4px 8px;
-  margin-top: 6px;
-  margin-bottom: 6px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  border-radius: 10px;
+  padding: 1px 5px;   /* mínimo padding */
+  margin-top: 3px;
+  margin-bottom: 3px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
 }
 
-/* Workspaces */
 #workspaces button {
   background: @bg1;
   color: @fg1;
   border-radius: 8px;
-  padding: 4px 8px;
+  padding: 1px 5px;
   margin: 0 3px;
 }
 #workspaces button.active {
@@ -58,7 +48,7 @@ window#waybar > box {
   color: #1d2021;
 }
 
-/* Módulos comunes */
+/* Módulos comunes (padding mínimo) */
 #clock,
 #network,
 #pulseaudio,
@@ -67,41 +57,13 @@ window#waybar > box {
 #window {
   background: @bg1;
   color: @fg0;
-  padding: 6px 10px;
-  border-radius: 12px;
-  margin: 0 4px;
+  padding: 1px 5px;
+  border-radius: 10px;
+  margin: 0 3px;
+  min-height: 0;
+  -gtk-icon-transform: scale(0.95);
 }
 
-/* Estados */
-#pulseaudio.muted {
-  background: @bg2;
-  color: @yellow;
-}
-#network.disconnected {
-  background: @bg2;
-  color: @yellow;
-}
-#battery.warning {
-  background: @bg2;
-  color: @yellow;
-}
-#battery.critical {
-  background: @bg2;
-  color: @red;
-}
-
-/* Ventana activa */
-#window { min-width: 200px; }
-#window > label { color: @fg2; }
-
-/* Tooltip */
-tooltip {
-  background: @bg1;
-  color: @fg0;
-  border-radius: 8px;
-  border: 1px solid @bg2;
-}
-
-/* Bandeja */
-#tray > .item { margin: 0 3px; }
-
+/* Tray: forzar tamaño sin inflar altura */
+#tray * { min-height: 0; }
+#tray > .item { margin: 0 2px; }
