@@ -1,49 +1,102 @@
 {
+  // --- Barra ---
   "layer": "top",
   "position": "top",
-  "height": 30,
+  "height": 28,
 
-  "modules-left": ["hyprland/workspaces", "hyprland/window"],
+  // Orden de módulos
+  "modules-left":   ["hyprland/workspaces", "hyprland/window"],
   "modules-center": ["clock"],
-  "modules-right": ["network", "pulseaudio", "battery", "tray"],
+  "modules-right":  ["network", "pulseaudio", "battery", "custom/power"],
 
+  // --- Workspaces (Hyprland) ---
   "hyprland/workspaces": {
-    "disable-scroll": false,
-    "all-outputs": true
+    "format": "{name}",
+    "on-click": "hyprctl dispatch workspace {id}",
+    "on-scroll-up":   "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1",
+    "sort-by-number": true,
+    "all-outputs": true,
+    "active-only": false,
+    "persistent-workspaces": {
+      "1": ["*"],
+      "2": ["*"],
+      "3": ["*"],
+      "4": ["*"],
+      "5": ["*"]
+    }
   },
 
+  // --- Ventana activa (nombre de la app/ventana) ---
   "hyprland/window": {
-    "max-length": 80,
-    "separate-outputs": false
+    "format": "{title}",
+    "separate-outputs": false,
+    "max-length": 48,
+    "rewrite": {
+      // Limpieza de títulos largos comunes (opcional)
+      " — Mozilla Firefox": "",
+      " - Visual Studio Code": "",
+      " — Vivaldi": "",
+      " - Zed": ""
+    }
   },
 
-  "clock": {
-    "format": "{:%a %d %b  %H:%M}",
-    "tooltip-format": "{:%A, %d %B %Y}\nSemana %V"
+  // --- Reloj al centro ---
+"clock": {
+  "interval": 1,
+  "format": "{:%Y-%m-%d  %H:%M}",
+  "format-alt": "{:%A %d %B, %H:%M}",
+  "tooltip-format": "{:%A, %d de %B de %Y}\n{:%H:%M:%S}",
+  "locale": "es_MX.UTF-8"
   },
 
+  // --- Red ---
   "network": {
-    "format-wifi": "{essid} {signalStrength}%",
-    "format-ethernet": "{ifname}",
-    "format-disconnected": "offline",
-    "tooltip": true
+    "tooltip": true,
+    "interval": 5,
+    "format-wifi": "  {essid}",
+    "format-ethernet": "  {ifname}",
+    "format-disconnected": "󰖪  Sin red",
+    "on-click": "nm-connection-editor || nm-connection-editor --show",
+    "max-length": 24
   },
 
+  // --- Volumen (PipeWire/Pulse) ---
   "pulseaudio": {
     "format": "{volume}% {icon}",
-    "format-muted": "muted {icon}",
-    "scroll-step": 5,
-    "on-click": "pavucontrol"
+    "format-muted": "muted  ",
+    "on-click": "pavucontrol",
+    "scroll-step": 2,
+    "format-icons": {
+      "headphones": "",
+      "handsfree": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["",""]
+    }
   },
 
+  // --- Batería ---
   "battery": {
+    "interval": 10,
+    "states": {
+      "warning": 20,
+      "critical": 10
+    },
     "format": "{capacity}% {icon}",
-    "states": { "warning": 20, "critical": 10 }
+    "format-charging": "{capacity}% 󰂄",
+    "format-plugged": "{capacity}% ",
+    "format-alt": "{time} {icon}",
+    "format-icons": ["","","","",""]
   },
 
-  "tray": {
-    "icon-size": 14,
-    "spacing": 3,
-    "ignore-list": ["nm-applet"]
+  // --- Menú de apagado ---
+  "custom/power": {
+    "format": "",
+    "tooltip": true,
+    "tooltip-format": "Apagar / Reiniciar / Suspender / Cerrar sesión",
+    "on-click": "wlogout || hyprctl dispatch exit 0"
   }
 }

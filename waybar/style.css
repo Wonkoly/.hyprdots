@@ -15,55 +15,55 @@
 @define-color aqua       #8ec07c;
 @define-color orange     #fe8019;
 
+* {
+  font-family: "CaskaydiaCove Nerd Font", monospace;
+  font-size: 12.5px;
+}
+
 window#waybar {
-  background: transparent;
-  color: @fg0;
-  font-family: "FiraCode Nerd Font", "JetBrainsMono Nerd Font", monospace;
-  font-size: 12px; /* baja 1px para cerrar altura */
+  /* Sin backdrop-filter (GTK3 no lo soporta) */
+  background: rgba(20, 20, 22, 0.85);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  color: #eaeaea;
 }
 
-window#waybar > box {
-  background: @bg0;
-  border-radius: 10px;
-  padding: 1px 5px;   /* mínimo padding */
-  margin-top: 3px;
-  margin-bottom: 3px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-}
-
+/* Workspaces */
+#workspaces { margin-left: 6px; }
 #workspaces button {
-  background: @bg1;
-  color: @fg1;
+  padding: 0 8px;
+  margin: 4px 3px;
+  color: #bbbbbb;
+  background: transparent;
   border-radius: 8px;
-  padding: 1px 5px;
-  margin: 0 3px;
 }
 #workspaces button.active {
-  background: @aqua;
-  color: #1d2021;
-  font-weight: 700;
+  color: #ffffff;
+  background: rgba(255,255,255,0.10);
 }
 #workspaces button.urgent {
-  background: @red;
-  color: #1d2021;
+  background: #b34d4d;
+  color: #fff;
 }
 
-/* Módulos comunes (padding mínimo) */
-#clock,
-#network,
-#pulseaudio,
-#battery,
-#tray,
-#window {
-  background: @bg1;
-  color: @fg0;
-  padding: 1px 5px;
-  border-radius: 10px;
-  margin: 0 3px;
-  min-height: 0;
-  -gtk-icon-transform: scale(0.95);
+/* Ventana activa (app) */
+#window { margin-left: 6px; padding: 0 10px; color: #cfd8dc; }
+
+/* Centro: reloj */
+#clock { color: #a7c7e7; padding: 0 10px; }
+
+/* Derecha */
+#network, #pulseaudio, #battery, #custom-power {
+  padding: 0 10px;
+  margin: 0 2px;
+  border-radius: 8px;
 }
 
-/* Tray: forzar tamaño sin inflar altura */
-#tray * { min-height: 0; }
-#tray > .item { margin: 0 2px; }
+#network { color: #b3e5c5; }
+#pulseaudio { color: #e7d39e; }
+#battery { color: #c8e6ff; }
+#custom-power { color: #ffb4b4; margin-right: 8px; }
+
+/* Estados */
+#pulseaudio.muted { color: #8c8c8c; }
+#battery.warning { color: #edb458; }
+#battery.critical { color: #ff6b6b; }

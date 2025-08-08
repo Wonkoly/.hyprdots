@@ -1,11 +1,4 @@
-/* ===============================
-   Waybar Style — Gruvbox (Dark)
-   Notas:
-   - GTK3 NO soporta :root ni var().
-   - Define colores con @define-color y úsalos como @nombre.
-   =============================== */
-
-/* Paleta Gruvbox */
+/* Waybar Style — Gruvbox (Dark) — 30px exacto */
 @define-color bg0        #282828;
 @define-color bg1        #3c3836;
 @define-color bg2        #504945;
@@ -22,86 +15,55 @@
 @define-color aqua       #8ec07c;
 @define-color orange     #fe8019;
 
-/* Contenedor principal */
-window#waybar {
-  background: transparent;
-  color: @fg0;
-  font-family: "FiraCode Nerd Font", "JetBrainsMono Nerd Font", monospace;
-  font-size: 14px;
+* {
+  font-family: "CaskaydiaCove Nerd Font", monospace;
+  font-size: 12.5px;
 }
 
-/* “Cápsula” de la barra */
-window#waybar > box {
-  background: @bg0;
-  border-radius: 12px;
-  padding: 4px 8px;
-  margin-top: 6px;
-  margin-bottom: 6px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+window#waybar {
+  /* Sin backdrop-filter (GTK3 no lo soporta) */
+  background: rgba(20, 20, 22, 0.85);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  color: #eaeaea;
 }
 
 /* Workspaces */
+#workspaces { margin-left: 6px; }
 #workspaces button {
-  background: @bg1;
-  color: @fg1;
+  padding: 0 8px;
+  margin: 4px 3px;
+  color: #bbbbbb;
+  background: transparent;
   border-radius: 8px;
-  padding: 4px 8px;
-  margin: 0 3px;
 }
 #workspaces button.active {
-  background: @aqua;
-  color: #1d2021;
-  font-weight: 700;
+  color: #ffffff;
+  background: rgba(255,255,255,0.10);
 }
 #workspaces button.urgent {
-  background: @red;
-  color: #1d2021;
+  background: #b34d4d;
+  color: #fff;
 }
 
-/* Módulos comunes */
-#clock,
-#network,
-#pulseaudio,
-#battery,
-#tray,
-#window {
-  background: @bg1;
-  color: @fg0;
-  padding: 6px 10px;
-  border-radius: 12px;
-  margin: 0 4px;
+/* Ventana activa (app) */
+#window { margin-left: 6px; padding: 0 10px; color: #cfd8dc; }
+
+/* Centro: reloj */
+#clock { color: #a7c7e7; padding: 0 10px; }
+
+/* Derecha */
+#network, #pulseaudio, #battery, #custom-power {
+  padding: 0 10px;
+  margin: 0 2px;
+  border-radius: 8px;
 }
+
+#network { color: #b3e5c5; }
+#pulseaudio { color: #e7d39e; }
+#battery { color: #c8e6ff; }
+#custom-power { color: #ffb4b4; margin-right: 8px; }
 
 /* Estados */
-#pulseaudio.muted {
-  background: @bg2;
-  color: @yellow;
-}
-#network.disconnected {
-  background: @bg2;
-  color: @yellow;
-}
-#battery.warning {
-  background: @bg2;
-  color: @yellow;
-}
-#battery.critical {
-  background: @bg2;
-  color: @red;
-}
-
-/* Ventana activa */
-#window { min-width: 200px; }
-#window > label { color: @fg2; }
-
-/* Tooltip */
-tooltip {
-  background: @bg1;
-  color: @fg0;
-  border-radius: 8px;
-  border: 1px solid @bg2;
-}
-
-/* Bandeja */
-#tray > .item { margin: 0 3px; }
-
+#pulseaudio.muted { color: #8c8c8c; }
+#battery.warning { color: #edb458; }
+#battery.critical { color: #ff6b6b; }

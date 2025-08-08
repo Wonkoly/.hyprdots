@@ -1,102 +1,102 @@
 {
-  // Capa/posición de la barra
+  // --- Barra ---
   "layer": "top",
   "position": "top",
-  // Altura y margen opcional
-  "height": 30,
-  "margin-top": 0,
-  "margin-left": 8,
-  "margin-right": 8,
+  "height": 28,
 
-  // Módulos en cada lado de la barra
-  "modules-left": [
-    "hyprland/workspaces",
-    "hyprland/window"
-  ],
-  "modules-center": [
-    "clock"
-  ],
-  "modules-right": [
-    "network",
-    "pulseaudio",
-    "battery",
-    "tray"
-  ],
+  // Orden de módulos
+  "modules-left":   ["hyprland/workspaces", "hyprland/window"],
+  "modules-center": ["clock"],
+  "modules-right":  ["network", "pulseaudio", "battery", "custom/power"],
 
-  // ----- MÓDULOS INTEGRADOS -----
-
-  // Workspaces de Hyprland
+  // --- Workspaces (Hyprland) ---
   "hyprland/workspaces": {
-    "disable-scroll": true,
+    "format": "{name}",
+    "on-click": "hyprctl dispatch workspace {id}",
+    "on-scroll-up":   "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1",
+    "sort-by-number": true,
     "all-outputs": true,
-    "format": "{icon}",
-    // Opcional: mostrar numeración simple si no quieres iconos
-    // "format": "{name}"
-    "on-click": "activate"
+    "active-only": false,
+    "persistent-workspaces": {
+      "1": ["*"],
+      "2": ["*"],
+      "3": ["*"],
+      "4": ["*"],
+      "5": ["*"]
+    }
   },
 
-  // Ventana activa (título)
+  // --- Ventana activa (nombre de la app/ventana) ---
   "hyprland/window": {
-    "format": "{}",
-    "max-length": 80,
-    "separate-outputs": false
+    "format": "{title}",
+    "separate-outputs": false,
+    "max-length": 48,
+    "rewrite": {
+      // Limpieza de títulos largos comunes (opcional)
+      " — Mozilla Firefox": "",
+      " - Visual Studio Code": "",
+      " — Vivaldi": "",
+      " - Zed": ""
+    }
   },
 
-  // Reloj (usa strftime)
-  "clock": {
-    "format": "{:%a %d %b  %H:%M}",
-    "tooltip-format": "{:%A, %d de %B de %Y}\nSemana %V",
-    "interval": 1
+  // --- Reloj al centro ---
+"clock": {
+  "interval": 1,
+  "format": "{:%Y-%m-%d  %H:%M}",
+  "format-alt": "{:%A %d %B, %H:%M}",
+  "tooltip-format": "{:%A, %d de %B de %Y}\n{:%H:%M:%S}",
+  "locale": "es_MX.UTF-8"
   },
 
-  // Red (Wi-Fi/Ethernet) —— requiere NetworkManager
+  // --- Red ---
   "network": {
-    "format-wifi": "  {essid} {signalStrength}%",
-    "format-ethernet": " {ifname}",
-    "format-disconnected": " Sin red",
-    "tooltip-format": "{ifname} — {ipaddr}/{cidr}\nSubida: {bandwidthUpBits}\nBajada: {bandwidthDownBits}",
-    "max-length": 40,
-    "on-click": "nm-connection-editor" // o tu gestor preferido
+    "tooltip": true,
+    "interval": 5,
+    "format-wifi": "  {essid}",
+    "format-ethernet": "  {ifname}",
+    "format-disconnected": "󰖪  Sin red",
+    "on-click": "nm-connection-editor || nm-connection-editor --show",
+    "max-length": 24
   },
 
-  // Volumen (PipeWire a través de compatibilidad PulseAudio)
+  // --- Volumen (PipeWire/Pulse) ---
   "pulseaudio": {
-    "format": "{icon} {volume}%",
-    "format-muted": "",
-    "tooltip": true,
-    "scroll-step": 5,
+    "format": "{volume}% {icon}",
+    "format-muted": "muted  ",
+    "on-click": "pavucontrol",
+    "scroll-step": 2,
     "format-icons": {
       "headphones": "",
-      "default": ["", "", ""]
-    },
-    "on-click": "pavucontrol" // Abre control de audio
+      "handsfree": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["",""]
+    }
   },
 
-  // Batería (se oculta sola si no hay batería)
+  // --- Batería ---
   "battery": {
+    "interval": 10,
     "states": {
       "warning": 20,
       "critical": 10
     },
-    "format": "{icon} {capacity}%",
-    "format-charging": " {capacity}%",
-    "format-full": "  {capacity}%",
-    "format-alt": "{time}",
-    "format-icons": ["", "", "", "", ""]
+    "format": "{capacity}% {icon}",
+    "format-charging": "{capacity}% 󰂄",
+    "format-plugged": "{capacity}% ",
+    "format-alt": "{time} {icon}",
+    "format-icons": ["","","","",""]
   },
 
-  // Bandeja del sistema (iconos de apps)
-  "tray": {
-    "icon-size": 16,
-    "spacing": 8
+  // --- Menú de apagado ---
+  "custom/power": {
+    "format": "",
+    "tooltip": true,
+    "tooltip-format": "Apagar / Reiniciar / Suspender / Cerrar sesión",
+    "on-click": "wlogout || hyprctl dispatch exit 0"
   }
-
-  // ----- EJEMPLO DE CUSTOM SCRIPT (opcional) -----
-  // "custom/weather": {
-  //   "exec": "~/.config/waybar/scripts/weather.sh",
-  //   "interval": 600,
-  //   "return-type": "json",
-  //   "tooltip": true
-  // }
 }
-
