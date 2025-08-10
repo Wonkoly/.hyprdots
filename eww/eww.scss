@@ -22,6 +22,9 @@ $green: #98971a;
   padding: 4px 10px;
 }
 
+.cpu { color: $accent; }
+.mem { color: $accent2; }
+
 .ws {
   .ws-btn {
     background: $bg-alt;
