@@ -15,7 +15,7 @@
     (box :halign "start" :spacing 8
       (workspaces))
     (box :halign "center"
-      (label :class "title" :text "Hyprland x EWW"))
+      (label :class "title" :text "Wonk"))
     (box :halign "end" :spacing 14
       (net)
       (volume)
@@ -23,7 +23,7 @@
       (clock))))
 
 ;; ---------- Workspaces (lee hyprctl) ----------
-(defpoll ws_list :interval "1s" "bash ~/.config/eww/scripts/workspaces.sh")
+(defpoll ws_list "bash ~/.config/eww/scripts/workspaces.sh")
 
 (defwidget workspaces []
   (box :class "ws"
@@ -34,19 +34,19 @@
         (label :text {w.name})))))
 
 ;; ---------- Red ----------
-(defpoll netinfo :interval "5s" "bash ~/.config/eww/scripts/net.sh")
+(defpoll netinfo :interval "1s" "bash ~/.config/eww/scripts/net.sh")
 (defwidget net []
   (box :class "pill"
     (label :text netinfo)))
 
 ;; ---------- Volumen ----------
-(defpoll vol :interval "1s" "bash ~/.config/eww/scripts/vol.sh")
+(defpoll vol :interval "0s" "bash ~/.config/eww/scripts/vol.sh")
 (defwidget volume []
   (box :class "pill"
     (label :text vol)))
 
 ;; ---------- Batería ----------
-(defpoll bat :interval "10s" "bash ~/.config/eww/scripts/bat.sh")
+(defpoll bat :interval "5s" "bash ~/.config/eww/scripts/bat.sh")
 (defwidget battery []
   (box :class "pill"
     (label :text bat)))
