@@ -17,6 +17,8 @@
     (box :halign "center"
       (label :class "title" :text "Wonk"))
     (box :halign "end" :spacing 14
+      (cpu)
+      (mem)
       (net)
       (volume)
       (battery)
@@ -38,6 +40,18 @@
 (defwidget net []
   (box :class "pill"
     (label :text netinfo)))
+
+;; ---------- CPU ----------
+(defpoll cpu :interval "2s" "bash ~/.config/eww/scripts/cpu.sh")
+(defwidget cpu []
+  (box :class "pill cpu"
+    (label :text cpu)))
+
+;; ---------- Memoria ----------
+(defpoll mem :interval "5s" "bash ~/.config/eww/scripts/mem.sh")
+(defwidget mem []
+  (box :class "pill mem"
+    (label :text mem)))
 
 ;; ---------- Volumen ----------
 (defpoll vol :interval "0s" "bash ~/.config/eww/scripts/vol.sh")
