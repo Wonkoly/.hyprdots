@@ -20,6 +20,7 @@
   :stacking "overlay"
   :exclusive false
   :focusable false
+<<<<<<< HEAD
   (box :class "vol-box" :spacing 8 :orientation "v" :space-evenly false
        (box :class "vol-header" :spacing 8
             (label :class "vol-title" :text "Volumen")
@@ -34,3 +35,74 @@
             (scale :class "slider"
                    :min 0 :max 100 :value volume_percent
                    :onchange (format set_volume "${value}"))))))
+=======
+  :exclusive true
+  :stacking "fg"
+  :geometry (geometry :x "0" :y "0" :anchor "top center" :width "100%" :height "30px")
+  (bar-root))
+
+;; ---------- Layout raíz ----------
+(defwidget bar-root []
+  (centerbox
+    :class "bar"
+    :spacing 12
+    (box :halign "start" :spacing 8
+      (workspaces))
+    (box :halign "center"
+      (label :class "title" :text "Wonk"))
+    (box :halign "end" :spacing 14
+      (cpu)
+      (mem)
+      (net)
+      (volume)
+      (battery)
+      (clock))))
+
+;; ---------- Workspaces (lee hyprctl) ----------
+(defpoll ws_list :interval "0s" "bash ~/.config/eww/scripts/workspaces.sh")
+
+(defwidget workspaces []
+  (box :class "ws"
+    (for w in ws_list
+      (button
+        :class {w.active ? "ws-btn active" : "ws-btn"}
+        :onclick "hyprctl dispatch workspace ${w.id}"
+        (label :text {w.name})))))
+
+;; ---------- Red ----------
+(defpoll netinfo :interval "1s" "bash ~/.config/eww/scripts/net.sh")
+(defwidget net []
+  (box :class "pill"
+    (label :text netinfo)))
+
+;; ---------- CPU ----------
+(defpoll cpu :interval "2s" "bash ~/.config/eww/scripts/cpu.sh")
+(defwidget cpu []
+  (box :class "pill cpu"
+    (label :text cpu)))
+
+;; ---------- Memoria ----------
+(defpoll mem :interval "5s" "bash ~/.config/eww/scripts/mem.sh")
+(defwidget mem []
+  (box :class "pill mem"
+    (label :text mem)))
+
+;; ---------- Volumen ----------
+(defpoll vol :interval "0s" "bash ~/.config/eww/scripts/vol.sh")
+(defwidget volume []
+  (box :class "pill"
+    (label :text vol)))
+
+;; ---------- Batería ----------
+(defpoll bat :interval "5s" "bash ~/.config/eww/scripts/bat.sh")
+(defwidget battery []
+  (box :class "pill"
+    (label :text bat)))
+
+;; ---------- Reloj ----------
+(defpoll time :interval "1s" "date '+%a %d %b • %H:%M'")
+(defwidget clock []
+  (box :class "pill"
+    (label :text time)))
+
+>>>>>>> 5d52674 (yuck)
