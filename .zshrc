@@ -14,6 +14,8 @@ fi
 # Instalacion de Plugins
 plugins=(
   git
+#  git-auto-fetch
+# git-commit
 )
 
 source $ZSH/oh-my-zsh.sh
